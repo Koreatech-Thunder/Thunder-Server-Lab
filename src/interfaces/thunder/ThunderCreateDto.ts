@@ -5,9 +5,8 @@ export interface ThunderCreateDto {
     title: String;
     hashtags: [Number];
     limitPlayerCount: Number;
-    meetDate: String;
     meetTime: String;
     content?: String; // 글 내용은 안 써도 상관없도록 함.
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Date; // 기본값으로 현재 시간 및 날짜 주어짐. 직접 작성할 필요 없음.
+    updatedAt: Date; // 기본값으로 현재 시간 및 날짜 주어짐. 직접 작성할 필요 없음.
 }
