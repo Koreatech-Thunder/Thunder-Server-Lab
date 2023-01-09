@@ -7,7 +7,6 @@ import User from '../models/User';
 const createUser = async (userCreateDto: UserCreateDto) => {
     try {
         const user = new User({
-            id: userCreateDto.id,
             name: userCreateDto.name,
             introduction: userCreateDto.introduction,
             manner: userCreateDto.manner,
@@ -30,7 +29,6 @@ const createUser = async (userCreateDto: UserCreateDto) => {
 const updateUser = async (userId: string, userUpdateDto: UserUpdateDto) => {
     try {
         const updatedUser = {
-            id: userUpdateDto.id,
             name: userUpdateDto.name,
             introduction: userUpdateDto.introduction,
             manner: userUpdateDto.manner,

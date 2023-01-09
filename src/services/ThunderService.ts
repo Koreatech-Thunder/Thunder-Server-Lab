@@ -10,7 +10,6 @@ const createThunder = async (thunderCreateDto: ThunderCreateDto) => {
             title: thunderCreateDto.title,
             hashtags: thunderCreateDto.hashtags,
             limitPlayerCount: thunderCreateDto.limitPlayerCount,
-            meetDate: thunderCreateDto.meetDate,
             meetTime: thunderCreateDto.meetTime,
             content: thunderCreateDto.content,
             createdAt: thunderCreateDto.createdAt,
