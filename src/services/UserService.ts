@@ -58,6 +58,18 @@ const findUserById = async (userId: string) => {
     };
 }
 
+const findUserList = async () => {
+    try {
+        const users: UserResponseDto[] | null = await User.find();
+
+        return users;
+    } catch (error)
+    {
+        console.log(error);
+        throw(error);
+    };
+}
+
 const deleteUser = async (userId: string) => {
     try {
         await User.findByIdAndDelete(userId);
@@ -74,5 +86,6 @@ export default {
     createUser,
     updateUser,
     findUserById,
+    findUserList,
     deleteUser
 }
