@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
 import { ThunderInfo } from "../interfaces/thunder/ThunderInfo";
+import moment from "moment-timezone"
 
-const moment = require('moment-timezone');
-moment.tz("Asia/Seoul"); // 타임존 서울로 설정.
+
+const getCurrentTime = () => {
+
+    moment.tz.setDefault("Asia/Seoul"); // 타임존 서울로 설정.
+    return moment().format("YYYY-MM-DD HH:mm:ss");
+}
 
 
 
 const ThunderSchema = new mongoose.Schema( {
     writerId: {
-        id: {
-            type: Number, // 작성자 id
-            required: true 
-        },
         name: {
             type: String, // 작성자 이름
             required: true
@@ -31,11 +32,7 @@ const ThunderSchema = new mongoose.Schema( {
     },
     limitPlayerCount: {  // 인원제한. 최소 한 명은 참여.
         type: Number,
-        minlength: 1,
-        required: true
-    },
-    meetDate: { // 약속 날짜
-        type: String,
+        min: 1,
         required: true
     },
     meetTime: { // 약속 시간
@@ -49,12 +46,12 @@ const ThunderSchema = new mongoose.Schema( {
     createdAt: { // 생성시간. 기본값은 현재 PC 시간.
         type: Date,
         required: true,
-        default: moment().format("YYYY-MM-DD HH:mm:ss")
+        default: getCurrentTime()
     },
     updatedAt: { // 최종 수정시간. 생성 시에는 현재 PC 시간으로 초기화.
         type: Date,
         required: true,
-        default: moment().format("YYYY-MM-DD HH:mm:ss")
+        default: getCurrentTime()
     }
 });
 
