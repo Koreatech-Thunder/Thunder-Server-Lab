@@ -1,5 +1,4 @@
 import { ThunderCreateDto } from '../interfaces/thunder/ThunderCreateDto';
-import User from '../models/User';
 import Thunder from "../models/Thunder";
 import { ThunderResponseDto } from '../interfaces/thunder/ThunderResponseDto';
 
@@ -31,11 +30,23 @@ const createThunder = async (thunderCreateDto: ThunderCreateDto) => {
     };
 }
 
-const getThunder = async () => {
+const getThunderList = async () => {
     try {
-        const user: ThunderResponseDto[] | null = await Thunder.find();
+        const thunders: ThunderResponseDto[] | null = await Thunder.find();
 
-        return user;
+        return thunders;
+    } catch (error)
+    {
+        console.log(error);
+        throw(error);
+    };
+}
+
+const getThunder = async (postId: string) => {
+    try {
+        const thunder: ThunderResponseDto | null = await Thunder.findById(postId);
+
+        return thunder;
     } catch (error)
     {
         console.log(error);
@@ -47,5 +58,6 @@ const getThunder = async () => {
 
 export default {
     createThunder,
+    getThunderList,
     getThunder
 }

@@ -27,10 +27,25 @@ const createThunder = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-const getThunder = async (req: Request, res: Response): Promise<void> => {
+const getThunderList = async (req: Request, res: Response): Promise<void> => {
 
     try {
-        const data: ThunderResponseDto[] | null = await ThunderService.getThunder();
+        const data: ThunderResponseDto[] | null = await ThunderService.getThunderList();
+
+        res.status(statusCode.OK).send(util.success(statusCode.OK, message.READ_THUNDER_SUCCESS, data));
+
+    }
+    catch (error) {
+        console.log(error);
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, message.INTERNAL_SERVER_ERROR));
+    }
+}
+
+const getThunder = async (req: Request, res: Response): Promise<void> => {
+    const { postId } = req.params;
+
+    try {
+        const data: ThunderResponseDto | null = await ThunderService.getThunder(postId);
 
         res.status(statusCode.OK).send(util.success(statusCode.OK, message.READ_THUNDER_SUCCESS, data));
 
@@ -43,5 +58,6 @@ const getThunder = async (req: Request, res: Response): Promise<void> => {
 
 export default {
     createThunder,
+    getThunderList,
     getThunder
 }
