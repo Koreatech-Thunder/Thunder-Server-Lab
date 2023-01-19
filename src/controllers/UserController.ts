@@ -19,12 +19,12 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
     try {
         const data: PostBaseResponseDto = await UserService.createUser(userCreateDto);
 
-        res.status(statusCode.CREATED).send(util.success(statusCode.CREATED, message.CREATE_USER_SUCCESS, data));
+        res.status(statusCode.CREATED).send(data);
 
     }
     catch (error) {
         console.log(error);
-        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, message.INTERNAL_SERVER_ERROR));
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail());
     }
 }
 
@@ -34,12 +34,12 @@ const updateUser = async (req: Request, res: Response): Promise<void> => {
 
     try {
         await UserService.updateUser(userId, userUpdateDto);
-        res.status(statusCode.NO_CONTENT).send(util.success(statusCode.OK, message.UPDATE_USER_SUCCESS));
+        res.status(statusCode.NO_CONTENT).send(util.success());
 
     }
     catch (error) {
         console.log(error);
-        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, message.INTERNAL_SERVER_ERROR));
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail());
     }
 }
 
@@ -49,12 +49,12 @@ const findUserById = async (req: Request, res: Response): Promise<void> => {
     try {
         const data: UserResponseDto | null = await UserService.findUserById(userId);
 
-        res.status(statusCode.OK).send(util.success(statusCode.OK, message.READ_USER_SUCCESS, data));
+        res.status(statusCode.OK).send(util.success(data));
 
     }
     catch (error) {
         console.log(error);
-        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, message.INTERNAL_SERVER_ERROR));
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail());
     }
 }
 
@@ -62,12 +62,12 @@ const findUserList = async (req: Request, res: Response): Promise<void> => {
     try {
         const data: UserResponseDto[] | null = await UserService.findUserList();
 
-        res.status(statusCode.OK).send(util.success(statusCode.OK, message.READ_USER_SUCCESS, data));
+        res.status(statusCode.OK).send(util.success(data));
 
     }
     catch (error) {
         console.log(error);
-        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, message.INTERNAL_SERVER_ERROR));
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail());
     }
 }
 
@@ -77,12 +77,12 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
     try {
         await UserService.deleteUser(userId);
 
-        res.status(statusCode.NO_CONTENT).send(util.success(statusCode.OK, message.DELETE_USER_SUCCESS));
+        res.status(statusCode.NO_CONTENT).send(util.success(statusCode.OK));
 
     }
     catch (error) {
         console.log(error);
-        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, message.INTERNAL_SERVER_ERROR));
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail());
     }
 }
 
