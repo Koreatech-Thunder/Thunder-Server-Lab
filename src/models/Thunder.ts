@@ -25,7 +25,7 @@ const ThunderSchema = new mongoose.Schema( {
         maxlength: 20
     },
     hashtags: { // 해쉬태그 최대선택개수 4, 최소 1개는 선택.
-        type: [Number],
+        type: [String],
         minlength: 1,
         maxlength: 4,
         required: true

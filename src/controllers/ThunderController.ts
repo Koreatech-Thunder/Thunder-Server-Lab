@@ -55,8 +55,24 @@ const getThunder = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
+const getThunderByHashtags = async (req: Request, res: Response): Promise<void> => {
+    const { tag } = req.params;
+
+    try {
+        const data: ThunderResponseDto[] | null = await ThunderService.getThunderByHashtags(tag);
+        res.status(statusCode.OK).send(util.success(data));
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail());
+    }
+} 
+
+
 export default {
     createThunder,
     getThunderList,
-    getThunder
+    getThunder,
+    getThunderByHashtags
 }

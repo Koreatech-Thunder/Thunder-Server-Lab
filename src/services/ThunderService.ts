@@ -54,9 +54,23 @@ const getThunder = async (postId: string) => {
 }
 
 
+const getThunderByHashtags = async (tag: string) => {
+    try {
+        const thunder: ThunderResponseDto[] | null = await Thunder.find({hashtags: tag});
+
+        return thunder;
+    } catch (error)
+    {
+        console.log(error);
+        throw(error);
+    };
+}
+
+
 
 export default {
     createThunder,
     getThunderList,
-    getThunder
+    getThunder,
+    getThunderByHashtags
 }
