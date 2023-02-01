@@ -12,11 +12,10 @@ const getCurrentTime = () => {
 
 
 const ThunderSchema = new mongoose.Schema( {
-    writerId: {
-        name: {
-            type: String, // 작성자 이름
-            required: true
-        },
+    hostId: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: "User",
     },
     title: { // 최대길이 1, 최소길이 20. 필수입력.
         type: String,
@@ -32,10 +31,10 @@ const ThunderSchema = new mongoose.Schema( {
     },
     limitPlayerCount: {  // 인원제한. 최소 한 명은 참여.
         type: Number,
-        min: 1,
+        min: 2,
         required: true
     },
-    meetTime: { // 약속 시간
+    deadline: { // 약속 시간
         type: String,
         required: true
     },
@@ -52,6 +51,10 @@ const ThunderSchema = new mongoose.Schema( {
         type: Date,
         required: true,
         default: getCurrentTime()
+    },
+    members: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "User"
     }
 });
 
