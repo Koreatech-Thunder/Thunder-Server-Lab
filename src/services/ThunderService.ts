@@ -6,14 +6,15 @@ import { ThunderResponseDto } from '../interfaces/thunder/ThunderResponseDto';
 const createThunder = async (thunderCreateDto: ThunderCreateDto) => {
     try {
         const thunder = new Thunder({
-            writerId: thunderCreateDto.writerId,
+            hostId: thunderCreateDto.hostId,
             title: thunderCreateDto.title,
             hashtags: thunderCreateDto.hashtags,
             limitPlayerCount: thunderCreateDto.limitPlayerCount,
-            meetTime: thunderCreateDto.meetTime,
+            deadline: thunderCreateDto.deadline,
             content: thunderCreateDto.content,
             createdAt: thunderCreateDto.createdAt,
-            updatedAt: thunderCreateDto.updatedAt
+            updatedAt: thunderCreateDto.updatedAt,
+            members: [thunderCreateDto.hostId]
         });
 
         await thunder.save();
@@ -31,7 +32,7 @@ const createThunder = async (thunderCreateDto: ThunderCreateDto) => {
 
 const getThunderList = async () => {
     try {
-        const thunders: ThunderResponseDto[] | null = await Thunder.find();
+        const thunders: ThunderResponseDto[] | null = await Thunder.find().populate('hostId', 'name').populate('members', 'name');
 
         return thunders;
     } catch (error)
@@ -43,7 +44,7 @@ const getThunderList = async () => {
 
 const getThunder = async (postId: string) => {
     try {
-        const thunder: ThunderResponseDto | null = await Thunder.findById(postId);
+        const thunder: ThunderResponseDto | null = await Thunder.findById(postId).populate('hostId', 'name').populate('members', 'name');
 
         return thunder;
     } catch (error)
@@ -56,7 +57,7 @@ const getThunder = async (postId: string) => {
 
 const getThunderByHashtags = async (tag: string) => {
     try {
-        const thunder: ThunderResponseDto[] | null = await Thunder.find({hashtags: tag});
+        const thunder: ThunderResponseDto[] | null = await Thunder.find({hashtags: tag}).populate('hostId', 'name').populate('members', 'name');
 
         return thunder;
     } catch (error)

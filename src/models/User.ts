@@ -12,14 +12,18 @@ const UserSchema = new mongoose.Schema( {
     introduction: {
         type: String
     },
-    manner: {
+    mannerTemperature: {
         type: Number,
         required: true,
         default: 36.5
     },
     hashtags: {
-        type: [Number]
+        type: [String]
+    },
+    isLogout: {
+        type: Boolean
     }
+
 });
 
 UserSchema.plugin(autoIncrement.plugin, {
